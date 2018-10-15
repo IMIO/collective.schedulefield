@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.7 (unreleased)
-----------------
+0.6.1 (2018-10-15)
+------------------
 
 - Do not display comment if empty.
   [bsuttor]
