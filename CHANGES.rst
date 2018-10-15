@@ -4,7 +4,8 @@ Changelog
 0.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Do not display comment if empty.
+  [bsuttor]
 
 
 0.6 (2018-04-23)
