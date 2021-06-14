@@ -4,7 +4,11 @@ Changelog
 0.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix python3 compatibility : Use @implementer instead of implements
+  [boulch]
+
+- Handle multi schedules and exceptional closures
+  [fbruynbroeck]
 
 
 0.6.1 (2018-10-15)
@@ -23,6 +27,7 @@ Changelog
 - Added missing z3c.form meta.zcml.
   [sgeulette]
 
+
 0.5 (2017-04-27)
 ----------------
 
@@ -35,6 +40,7 @@ Changelog
 
 - Bugfix: do not try to load json value if there is no values.
   [bsuttor]
+
 
 0.3 (2017-03-01)
 ----------------

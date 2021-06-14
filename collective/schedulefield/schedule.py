@@ -7,7 +7,6 @@ from zope import schema
 from zope.component import adapter
 from zope.component import adapts
 from zope.interface import implementer
-from zope.interface import implements
 from zope.schema.interfaces import IDict
 from zope.schema.interfaces import IObject
 from zope.schema.interfaces import IFromUnicode
@@ -36,12 +35,12 @@ class IScheduleWithTitle(IObject):
     """IScheduleWithTitle"""
 
 
+@implementer(IScheduleWithTitle)
 class ScheduleWithTitle(schema.Object):
-    implements(IScheduleWithTitle)
+    """"""
 
-
+@implementer(ISchedule, IFromUnicode)
 class Schedule(schema.Dict):
-    implements(ISchedule, IFromUnicode)
 
     def fromUnicode(self, value):
         """
@@ -75,8 +74,9 @@ class Schedule(schema.Dict):
         return None
 
 
+@implementer(ISchedule)
 class ScheduleWidget(HTMLInputWidget, Widget):
-    implements(ISchedule)
+
     """Schedule widget implementation."""
 
     klass = u'schedule-widget'
@@ -164,8 +164,8 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         return must_show
 
 
+@implementer(IScheduleWithTitle)
 class ScheduleWithTitleWidget(HTMLFormElement, ObjectWidget):
-    implements(IScheduleWithTitle)
 
     klass = u'object-widget'
     css = u'object'

@@ -7,7 +7,6 @@ from z3c.form.widget import FieldWidget
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
-from zope.interface import implements
 from zope.schema.interfaces import IObject
 
 
@@ -15,12 +14,12 @@ class IExceptionalClosure(IObject):
     """IExceptionalClosure"""
 
 
+@implementer(IExceptionalClosure)
 class ExceptionalClosure(schema.Object):
-    implements(IExceptionalClosure)
+    """"""
 
-
+@implementer(IExceptionalClosure)
 class ExceptionalClosureWidget(HTMLFormElement, ObjectWidget):
-    implements(IExceptionalClosure)
 
     klass = u'object-widget'
     css = u'object'
