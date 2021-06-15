@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
@@ -35,6 +36,15 @@
       for=".exceptionalclosure.IExceptionalClosure
            z3c.form.interfaces.IFormLayer"
       />
+
+    <adapter
+      zcml:condition="installed plone.restapi"
+      factory=".serializer.ExceptionalclosureSerializer" />
+
+    <adapter
+      zcml:condition="installed plone.restapi"
+      factory=".serializer.MultiScheduleSerializer" />
+
 
   <browser:resource
     file="js/jquery.maskedinput.min.js"
