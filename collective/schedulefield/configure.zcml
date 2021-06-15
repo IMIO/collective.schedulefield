@@ -37,14 +37,15 @@
            z3c.form.interfaces.IFormLayer"
       />
 
-    <adapter
+  <adapter
       zcml:condition="installed plone.restapi"
-      factory=".serializer.ExceptionalclosureSerializer" />
+      factory=".serializer.ExceptionalclosureSerializer"
+      />
 
-    <adapter
+  <adapter
       zcml:condition="installed plone.restapi"
-      factory=".serializer.MultiScheduleSerializer" />
-
+      factory=".serializer.MultiScheduleSerializer"
+      />
 
   <browser:resource
     file="js/jquery.maskedinput.min.js"
