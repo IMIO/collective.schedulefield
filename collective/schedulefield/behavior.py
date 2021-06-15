@@ -106,6 +106,15 @@ class ScheduledWithTitle(object):
 registerFactoryAdapter(IScheduledWithTitle, ScheduledWithTitle)
 
 
+class IMultiScheduleField(Interface):
+    """Marker interface for multi schedule field"""
+
+
+@implementer(IMultiScheduleField)
+class MultiScheduleField(List):
+    """"""
+
+
 @provider(IFormFieldProvider)
 class IMultiScheduledContent(Interface):
 
@@ -120,7 +129,7 @@ class IMultiScheduledContent(Interface):
         required=False,
     )
 
-    multi_schedule = List(
+    multi_schedule = MultiScheduleField(
         title=_(u'Multi Schedule'),
         value_type=ScheduleWithTitle(__name__='MultiSchedule', schema=IScheduledWithTitle, required=False),
         required=False,
@@ -155,6 +164,15 @@ class ExceptionalClosureObject(object):
 registerFactoryAdapter(IExceptionalClosure, ExceptionalClosureObject)
 
 
+class IExceptionalClosureField(Interface):
+    """Marker interface for exceptional closure field"""
+
+
+@implementer(IExceptionalClosureField)
+class ExceptionalClosureField(List):
+    """"""
+
+
 @provider(IFormFieldProvider)
 class IExceptionalClosureContent(Interface):
 
@@ -164,7 +182,7 @@ class IExceptionalClosureContent(Interface):
         fields=['exceptional_closure'],
     )
 
-    exceptional_closure = List(
+    exceptional_closure = ExceptionalClosureField(
         title=_(u'Dates'),
         value_type=ExceptionalClosure(__name__='ExceptionalClosure', schema=IExceptionalClosure, required=False),
         required=False,
