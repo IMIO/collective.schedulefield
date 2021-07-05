@@ -19,6 +19,8 @@ class ExceptionalclosureSerializer(DefaultFieldSerializer):
 
     def __call__(self):
         value = self.get_value()
+        if value is None:
+            return []
         closures = [json_compatible(i.__dict__) for i in value]
         return json_compatible(closures)
 
@@ -30,5 +32,7 @@ class MultiScheduleSerializer(DefaultFieldSerializer):
 
     def __call__(self):
         value = self.get_value()
+        if value is None:
+            return []
         multischedules = [json_compatible(i.__dict__) for i in value]
         return json_compatible(multischedules)
