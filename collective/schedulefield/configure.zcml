@@ -47,6 +47,11 @@
       factory=".serializer.MultiScheduleSerializer"
       />
 
+  <adapter
+      zcml:condition="installed plone.restapi"
+      factory=".serializer.daterange_converter"
+      />
+
   <browser:resource
     file="js/jquery.maskedinput.min.js"
     name="jquery.maskedinput.min.js"
