@@ -4,6 +4,10 @@ Changelog
 0.6.2 (unreleased)
 ------------------
 
+- Add missing key_type/value_type for Schedule field. This is needed (at least)
+  to export types schemas informations
+  [laulaz]
+
 - Fix python3 compatibility : Use @implementer instead of implements
   [boulch]
 

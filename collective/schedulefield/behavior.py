@@ -22,7 +22,9 @@ from collective.schedulefield.schedule import ScheduleWithTitle
 from collective.schedulefield.exceptionalclosure import ExceptionalClosure
 
 from z3c.form.object import registerFactoryAdapter
+from zope.schema import ASCIILine
 from zope.schema import Date
+from zope.schema import Dict
 from zope.schema import List
 from zope.schema import Object
 from zope.schema import Text
@@ -40,6 +42,8 @@ class IScheduledContent(Interface):
 
     schedule = Schedule(
         title=_(u'Schedule'),
+        key_type=ASCIILine(),
+        value_type=Dict(key_type=ASCIILine(), value_type=ASCIILine()),
         required=False,
     )
 
@@ -91,6 +95,8 @@ class IScheduledWithTitle(Interface):
     )
 
     schedule = Schedule(
+        key_type=ASCIILine(),
+        value_type=Dict(key_type=ASCIILine(), value_type=ASCIILine()),
         title=_(u'Schedule'),
     )
 
@@ -126,6 +132,8 @@ class IMultiScheduledContent(Interface):
 
     schedule = Schedule(
         title=_(u'Schedule'),
+        key_type=ASCIILine(),
+        value_type=Dict(key_type=ASCIILine(), value_type=ASCIILine()),
         required=False,
     )
 
