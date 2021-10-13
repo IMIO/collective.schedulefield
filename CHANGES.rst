@@ -4,6 +4,9 @@ Changelog
 0.6.2 (unreleased)
 ------------------
 
+- Fix error when validating an empty value for a schedule
+  [laulaz]
+
 - Add missing key_type/value_type for Schedule field. This is needed (at least)
   to export types schemas informations
   [laulaz]

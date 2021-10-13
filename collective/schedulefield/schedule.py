@@ -49,6 +49,8 @@ class Schedule(schema.Dict):
         return value
 
     def validate(self, value):
+        if value is None or value is NO_VALUE:
+            return
         if type(value) != dict:
             value = json.loads(value)
         for day in value:
