@@ -4,6 +4,9 @@ Changelog
 0.6.2 (unreleased)
 ------------------
 
+- Display schedule viewlets only on views (not on folder_contents, cropping, etc.)
+  [laulaz]
+
 - Fix error when validating an empty value for a schedule
   [laulaz]
 

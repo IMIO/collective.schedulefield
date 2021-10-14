@@ -129,6 +129,7 @@
   <browser:viewlet
     name="schedulefield.schedule"
     for="*"
+    view="plone.app.layout.globals.interfaces.IViewView"
     manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
     class=".viewlet.ScheduledContentViewlet"
     template="scheduled_content_viewlet.pt"
@@ -138,6 +139,7 @@
   <browser:viewlet
     name="schedulefield.multischedule"
     for="*"
+    view="plone.app.layout.globals.interfaces.IViewView"
     manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
     class=".viewlet.MultiScheduledContentViewlet"
     template="multi_scheduled_content_viewlet.pt"
@@ -147,6 +149,7 @@
   <browser:viewlet
     name="schedulefield.exceptionalclosure"
     for="*"
+    view="plone.app.layout.globals.interfaces.IViewView"
     manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
     class=".viewlet.ExceptionalClosureContentViewlet"
     template="exceptionalclosure_content_viewlet.pt"
