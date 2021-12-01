@@ -4,6 +4,9 @@ Changelog
 0.6.2 (unreleased)
 ------------------
 
+- Add basic serializers / deserializers
+  [laulaz]
+
 - Display schedule viewlets only on views (not on folder_contents, cropping, etc.)
   [laulaz]
 

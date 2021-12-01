@@ -44,6 +44,11 @@
 
   <adapter
       zcml:condition="installed plone.restapi"
+      factory=".serializer.ExceptionalclosureDeserializer"
+      />
+
+  <adapter
+      zcml:condition="installed plone.restapi"
       factory=".serializer.MultiScheduleSerializer"
       />
 
