@@ -16,13 +16,14 @@ class IExceptionalClosure(IObject):
 
 @implementer(IExceptionalClosure)
 class ExceptionalClosure(schema.Object):
-    """"""
+    """ """
+
 
 @implementer(IExceptionalClosure)
 class ExceptionalClosureWidget(HTMLFormElement, ObjectWidget):
 
-    klass = u'object-widget'
-    css = u'object'
+    klass = u"object-widget"
+    css = u"object"
 
 
 @adapter(IObject, IFormLayer)

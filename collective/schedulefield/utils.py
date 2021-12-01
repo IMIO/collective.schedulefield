@@ -11,14 +11,14 @@ def get_schedule_by_date(context, date):
     :param date: Date
     """
     if IMultiScheduledContent.providedBy(context):
-        multi_schedule = getattr(context, 'multi_schedule', None) or []
+        multi_schedule = getattr(context, "multi_schedule", None) or []
         for i in multi_schedule:
             schedule = i.schedule
             dates = i.dates or []
             for d in dates:
                 if d.start_date <= date <= d.end_date:
                     return schedule
-        return getattr(context, 'schedule', None)
+        return getattr(context, "schedule", None)
 
 
 def get_exceptionalclosure_by_date(context, date):
@@ -28,7 +28,7 @@ def get_exceptionalclosure_by_date(context, date):
     :param date:
     """
     if IExceptionalClosureContent.providedBy(context):
-        dates = getattr(context, 'exceptional_closure', None) or []
+        dates = getattr(context, "exceptional_closure", None) or []
         for d in dates:
             if dt.today() == d.date:
                 return d

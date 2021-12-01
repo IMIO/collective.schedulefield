@@ -27,8 +27,7 @@ from collective.schedulefield import _
 
 
 class ISchedule(IDict):
-    """
-    """
+    """ """
 
 
 class IScheduleWithTitle(IObject):
@@ -37,14 +36,13 @@ class IScheduleWithTitle(IObject):
 
 @implementer(IScheduleWithTitle)
 class ScheduleWithTitle(schema.Object):
-    """"""
+    """ """
+
 
 @implementer(ISchedule, IFromUnicode)
 class Schedule(schema.Dict):
-
     def fromUnicode(self, value):
-        """
-        """
+        """ """
         self.validate(value)
         return value
 
@@ -55,7 +53,7 @@ class Schedule(schema.Dict):
             value = json.loads(value)
         for day in value:
             for section in value[day]:
-                if section == 'comment':
+                if section == "comment":
                     continue
                 error = self._validate_format(value[day][section])
                 if error:
@@ -67,11 +65,11 @@ class Schedule(schema.Dict):
         """
         if not data:
             return None
-        hour, minute = data.split(':')
+        hour, minute = data.split(":")
         try:
             time(int(hour), int(minute))
         except ValueError:
-            return _(u'Not a valid time format.')
+            return _(u"Not a valid time format.")
 
         return None
 
@@ -81,28 +79,27 @@ class ScheduleWidget(HTMLInputWidget, Widget):
 
     """Schedule widget implementation."""
 
-    klass = u'schedule-widget'
-    css = u'schedule'
-    value = u''
+    klass = u"schedule-widget"
+    css = u"schedule"
+    value = u""
     size = None
     maxlength = None
 
     @property
     def days(self):
-        return (('monday', _('Monday')),
-                ('tuesday', _('Tuesday')),
-                ('wednesday', _('Wednesday')),
-                ('thursday', _('Thursday')),
-                ('friday', _('Friday')),
-                ('saturday', _('Saturday')),
-                ('sunday', _('Sunday')))
+        return (
+            ("monday", _("Monday")),
+            ("tuesday", _("Tuesday")),
+            ("wednesday", _("Wednesday")),
+            ("thursday", _("Thursday")),
+            ("friday", _("Friday")),
+            ("saturday", _("Saturday")),
+            ("sunday", _("Sunday")),
+        )
 
     @property
     def day_sections(self):
-        return ('morningstart',
-                'morningend',
-                'afternoonstart',
-                'afternoonend')
+        return ("morningstart", "morningend", "afternoonstart", "afternoonend")
 
     def update(self):
         super(ScheduleWidget, self).update()
@@ -114,13 +111,13 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         is_empty = True
         for key, name in self.days:
             datas[key] = {
-                'comment': self.request.get(
-                    '{0}.{1}.comment'.format(self.name, key),
+                "comment": self.request.get(
+                    "{0}.{1}.comment".format(self.name, key),
                 ),
             }
             for day_section in self.day_sections:
                 data = self.request.get(
-                    '{0}.{1}.{2}'.format(self.name, key, day_section),
+                    "{0}.{1}.{2}".format(self.name, key, day_section),
                     None,
                 )
                 formated = self._format(data)
@@ -137,18 +134,18 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         return hour for a specific day section
         """
         if (not self.value) or (self.value is NO_VALUE):
-            return u''
+            return u""
         return self.value.get(day).get(day_section)
 
     def get_comment(self, day):
         """Return the comment for a specific day"""
         if not self.value or self.value is NO_VALUE:
-            return u''
-        return self.value.get(day).get('comment')
+            return u""
+        return self.value.get(day).get("comment")
 
     @staticmethod
     def _format(data):
-        if data == '__:__':
+        if data == "__:__":
             return None
         return data
 
@@ -169,8 +166,8 @@ class ScheduleWidget(HTMLInputWidget, Widget):
 @implementer(IScheduleWithTitle)
 class ScheduleWithTitleWidget(HTMLFormElement, ObjectWidget):
 
-    klass = u'object-widget'
-    css = u'object'
+    klass = u"object-widget"
+    css = u"object"
 
 
 class WidgetDataConverter(BaseDataConverter):

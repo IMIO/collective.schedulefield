@@ -28,7 +28,7 @@ class ScheduledContentViewlet(WidgetsView, base.ViewletBase):
 
     @property
     def has_value(self):
-        schedule = getattr(self.context, 'schedule', None)
+        schedule = getattr(self.context, "schedule", None)
         if schedule:
             for day in schedule.values():
                 if len([v for v in day.values() if v]) > 0:
@@ -45,7 +45,7 @@ class MultiScheduledContentViewlet(ScheduledContentViewlet):
 
     @property
     def has_closure(self):
-        dates = getattr(self.context, 'exceptional_closure', None) or []
+        dates = getattr(self.context, "exceptional_closure", None) or []
         if date.today() in [d.date for d in dates]:
             return True
         return False
@@ -54,7 +54,7 @@ class MultiScheduledContentViewlet(ScheduledContentViewlet):
     def has_value(self):
         if self.has_closure:
             return False
-        multi_schedule = getattr(self.context, 'multi_schedule', None) or []
+        multi_schedule = getattr(self.context, "multi_schedule", None) or []
         for i in multi_schedule:
             dates = i.dates or []
             for d in dates:
@@ -67,15 +67,19 @@ class MultiScheduledContentViewlet(ScheduledContentViewlet):
         if self.has_closure:
             return []
         widgets = []
-        multi_schedule = self.w.get('multi_schedule').widgets
+        multi_schedule = self.w.get("multi_schedule").widgets
         for i in multi_schedule:
-            schedule = i._value['schedule']
+            schedule = i._value["schedule"]
             if schedule:
                 for day in schedule.values():
                     if len([v for v in day.values() if v]) > 0:
-                        dates = i._value['dates'] or []
+                        dates = i._value["dates"] or []
                         for d in dates:
-                            if d.start_date - timedelta(days=TIMEDELTA) <= date.today() <= d.end_date:
+                            if (
+                                d.start_date - timedelta(days=TIMEDELTA)
+                                <= date.today()
+                                <= d.end_date
+                            ):
                                 widgets.append(i)
         return widgets
 
@@ -93,9 +97,9 @@ class ExceptionalClosureContentViewlet(WidgetsView, base.ViewletBase):
 
     @property
     def get_closure(self):
-        dates = self.w.get('exceptional_closure').widgets
+        dates = self.w.get("exceptional_closure").widgets
         for d in dates:
-            if date.today() == d._value['date']:
+            if date.today() == d._value["date"]:
                 return d
 
     @property

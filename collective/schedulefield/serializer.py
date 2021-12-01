@@ -63,7 +63,7 @@ class MultiScheduleSerializer(DefaultFieldSerializer):
         value = self.get_value()
         if value is None:
             return []
-        multischedules = [json_compatible(v.__dict__ )for v in value]
+        multischedules = [json_compatible(v.__dict__) for v in value]
         return json_compatible(multischedules)
 
 

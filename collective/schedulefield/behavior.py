@@ -35,13 +35,13 @@ from zope.schema.fieldproperty import FieldProperty
 class IScheduledContent(Interface):
 
     fieldset(
-        'schedule',
-        label=_('Schedule'),
-        fields=['schedule'],
+        "schedule",
+        label=_("Schedule"),
+        fields=["schedule"],
     )
 
     schedule = Schedule(
-        title=_(u'Schedule'),
+        title=_(u"Schedule"),
         key_type=ASCIILine(),
         value_type=Dict(key_type=ASCIILine(), value_type=ASCIILine()),
         required=False,
@@ -51,7 +51,6 @@ class IScheduledContent(Interface):
 @implementer(IScheduledContent)
 @adapter(IDexterityContent)
 class ScheduledContent(object):
-
     def __init__(self, context):
         self.context = context
 
@@ -64,19 +63,20 @@ class IDateRange(Interface):
     """IDateRange"""
 
     start_date = Date(
-        title=_(u'Start date'),
+        title=_(u"Start date"),
     )
 
     end_date = Date(
-        title=_(u'End date'),
+        title=_(u"End date"),
     )
 
 
 @implementer(IDateRange)
 class DateRange(object):
     """DateRange"""
-    start_date = FieldProperty(IDateRange['start_date'])
-    end_date = FieldProperty(IDateRange['end_date'])
+
+    start_date = FieldProperty(IDateRange["start_date"])
+    end_date = FieldProperty(IDateRange["end_date"])
 
 
 registerFactoryAdapter(IDateRange, DateRange)
@@ -86,27 +86,28 @@ class IScheduledWithTitle(Interface):
     """IScheduledWithTitle"""
 
     title = Text(
-        title=_(u'Title'),
+        title=_(u"Title"),
     )
 
     dates = List(
-        title=_(u'Dates'),
-        value_type=Object(__name__='DateRange', schema=IDateRange),
+        title=_(u"Dates"),
+        value_type=Object(__name__="DateRange", schema=IDateRange),
     )
 
     schedule = Schedule(
         key_type=ASCIILine(),
         value_type=Dict(key_type=ASCIILine(), value_type=ASCIILine()),
-        title=_(u'Schedule'),
+        title=_(u"Schedule"),
     )
 
 
 @implementer(IScheduledWithTitle)
 class ScheduledWithTitle(object):
     """ScheduledWithTitle"""
-    title = FieldProperty(IScheduledWithTitle['title'])
-    dates = FieldProperty(IScheduledWithTitle['dates'])
-    schedule = FieldProperty(IScheduledWithTitle['schedule'])
+
+    title = FieldProperty(IScheduledWithTitle["title"])
+    dates = FieldProperty(IScheduledWithTitle["dates"])
+    schedule = FieldProperty(IScheduledWithTitle["schedule"])
 
 
 registerFactoryAdapter(IScheduledWithTitle, ScheduledWithTitle)
@@ -118,28 +119,30 @@ class IMultiScheduleField(Interface):
 
 @implementer(IMultiScheduleField)
 class MultiScheduleField(List):
-    """"""
+    """ """
 
 
 @provider(IFormFieldProvider)
 class IMultiScheduledContent(Interface):
 
     fieldset(
-        'multischedule',
-        label=_('Multi Schedule'),
-        fields=['schedule', 'multi_schedule'],
+        "multischedule",
+        label=_("Multi Schedule"),
+        fields=["schedule", "multi_schedule"],
     )
 
     schedule = Schedule(
-        title=_(u'Schedule'),
+        title=_(u"Schedule"),
         key_type=ASCIILine(),
         value_type=Dict(key_type=ASCIILine(), value_type=ASCIILine()),
         required=False,
     )
 
     multi_schedule = MultiScheduleField(
-        title=_(u'Multi Schedule'),
-        value_type=ScheduleWithTitle(__name__='MultiSchedule', schema=IScheduledWithTitle, required=False),
+        title=_(u"Multi Schedule"),
+        value_type=ScheduleWithTitle(
+            __name__="MultiSchedule", schema=IScheduledWithTitle, required=False
+        ),
         required=False,
     )
 
@@ -152,12 +155,13 @@ class MultiScheduledContent(ScheduledContent):
 
 class IExceptionalClosure(Interface):
     """IExceptionalClosure"""
+
     title = Text(
-        title=_(u'Title'),
+        title=_(u"Title"),
     )
 
     date = Date(
-        title=_(u'Date'),
+        title=_(u"Date"),
     )
 
 
@@ -165,8 +169,8 @@ class IExceptionalClosure(Interface):
 class ExceptionalClosureObject(object):
     """ExceptionalClosureObject"""
 
-    title = FieldProperty(IExceptionalClosure['title'])
-    date = FieldProperty(IExceptionalClosure['date'])
+    title = FieldProperty(IExceptionalClosure["title"])
+    date = FieldProperty(IExceptionalClosure["date"])
 
 
 registerFactoryAdapter(IExceptionalClosure, ExceptionalClosureObject)
@@ -178,21 +182,23 @@ class IExceptionalClosureField(Interface):
 
 @implementer(IExceptionalClosureField)
 class ExceptionalClosureField(List):
-    """"""
+    """ """
 
 
 @provider(IFormFieldProvider)
 class IExceptionalClosureContent(Interface):
 
     fieldset(
-        'exceptionalclosure',
-        label=_('Exceptional closure'),
-        fields=['exceptional_closure'],
+        "exceptionalclosure",
+        label=_("Exceptional closure"),
+        fields=["exceptional_closure"],
     )
 
     exceptional_closure = ExceptionalClosureField(
-        title=_(u'Dates'),
-        value_type=ExceptionalClosure(__name__='ExceptionalClosure', schema=IExceptionalClosure, required=False),
+        title=_(u"Dates"),
+        value_type=ExceptionalClosure(
+            __name__="ExceptionalClosure", schema=IExceptionalClosure, required=False
+        ),
         required=False,
     )
 
@@ -200,6 +206,5 @@ class IExceptionalClosureContent(Interface):
 @implementer(IExceptionalClosureContent)
 @adapter(IDexterityContent)
 class ExceptionalClosureContent(object):
-
     def __init__(self, context):
         self.context = context
