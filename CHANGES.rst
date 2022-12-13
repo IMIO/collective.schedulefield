@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6.2 (unreleased)
+1.0a1 (2022-12-13)
 ------------------
 
 - Add basic serializers / deserializers
