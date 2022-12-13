@@ -4,7 +4,24 @@ Changelog
 0.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add basic serializers / deserializers
+  [laulaz]
+
+- Display schedule viewlets only on views (not on folder_contents, cropping, etc.)
+  [laulaz]
+
+- Fix error when validating an empty value for a schedule
+  [laulaz]
+
+- Add missing key_type/value_type for Schedule field. This is needed (at least)
+  to export types schemas informations
+  [laulaz]
+
+- Fix python3 compatibility : Use @implementer instead of implements
+  [boulch]
+
+- Handle multi schedules and exceptional closures
+  [fbruynbroeck]
 
 
 0.6.1 (2018-10-15)
@@ -23,6 +40,7 @@ Changelog
 - Added missing z3c.form meta.zcml.
   [sgeulette]
 
+
 0.5 (2017-04-27)
 ----------------
 
@@ -35,6 +53,7 @@ Changelog
 
 - Bugfix: do not try to load json value if there is no values.
   [bsuttor]
+
 
 0.3 (2017-03-01)
 ----------------

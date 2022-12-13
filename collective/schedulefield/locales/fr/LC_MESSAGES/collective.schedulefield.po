@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
-"POT-Creation-Date: 2016-07-13 14:18+0000\n"
+"POT-Creation-Date: 2018-03-08 13:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,40 +16,100 @@ msgstr ""
 "Language: \n"
 "X-Is-Fallback-For: fr-be fr-ca fr-lu fr-mc fr-ch fr-fr\n"
 
-#: ../schedule.py:80
+#: ../configure.zcml:85
+msgid "Adds exceptional closure field"
+msgstr ""
+
+#: ../configure.zcml:76
+msgid "Adds multi schedule field"
+msgstr ""
+
+#: ../configure.zcml:67
+msgid "Adds schedule field"
+msgstr ""
+
+#: ../behavior.py:141
+msgid "Date"
+msgstr ""
+
+#: ../behavior.py:87
+msgid "Dates"
+msgstr ""
+
+#: ../behavior.py:65
+msgid "End date"
+msgstr "Date de fin"
+
+#: ../behavior.py:161
+msgid "Exceptional closure"
+msgstr "Fermeture exceptionnelle"
+
+#: ../configure.zcml:85
+msgid "Exceptional closure Content"
+msgstr ""
+
+#: ../schedule.py:83
 msgid "Friday"
 msgstr "Vendredi"
 
-#: ../schedule.py:76
+#: ../configure.zcml:19
+msgid "Installs the collective.schedulefield add-on."
+msgstr ""
+
+#: ../schedule.py:79
 msgid "Monday"
 msgstr "Lundi"
 
-#: ../schedule.py:59
+#: ../behavior.py:112
+msgid "Multi Schedule"
+msgstr "Horaire multiple"
+
+#: ../configure.zcml:76
+msgid "Multi scheduled Content"
+msgstr ""
+
+#: ../schedule.py:62
 msgid "Not a valid time format."
 msgstr "Le format d'heure est incorrect"
 
-#: ../schedule.py:81
+#: ../schedule.py:84
 msgid "Saturday"
 msgstr "Samedi"
 
-#: ../behavior.py:29
-#: ../scheduled_content_viewlet.pt:7
+#: ../behavior.py:35
+#: ../exceptionalclosure_content_viewlet.pt:7
+#: ../multi_scheduled_content_viewlet.pt:7
 msgid "Schedule"
 msgstr "Horaire"
 
-#: ../schedule.py:82
+#: ../configure.zcml:67
+msgid "Scheduled Content"
+msgstr ""
+
+#: ../behavior.py:61
+msgid "Start date"
+msgstr "Date de début"
+
+#: ../schedule.py:85
 msgid "Sunday"
 msgstr "Dimanche"
 
-#: ../schedule.py:79
+#: ../schedule.py:82
 msgid "Thursday"
 msgstr "Jeudi"
 
-#: ../schedule.py:77
+#: ../behavior.py:83
+msgid "Title"
+msgstr "Titre"
+
+#: ../schedule.py:80
 msgid "Tuesday"
 msgstr "Mardi"
 
-#: ../schedule.py:78
+#: ../schedule.py:81
 msgid "Wednesday"
 msgstr "Mercredi"
 
+#: ../configure.zcml:19
+msgid "collective.schedulefield"
+msgstr ""

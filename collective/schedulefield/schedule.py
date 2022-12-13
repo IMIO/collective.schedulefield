@@ -5,42 +5,55 @@ from datetime import time
 
 from zope import schema
 from zope.component import adapter
+from zope.component import adapts
 from zope.interface import implementer
-from zope.interface import implements
 from zope.schema.interfaces import IDict
+from zope.schema.interfaces import IObject
 from zope.schema.interfaces import IFromUnicode
 from zope.schema.interfaces import WrongContainedType
 
 from z3c.form.interfaces import IFormLayer
 from z3c.form.interfaces import IFieldWidget
 from z3c.form.interfaces import NO_VALUE
+from z3c.form.object import ObjectWidget
 
+from z3c.form.converter import BaseDataConverter
 from z3c.form.widget import FieldWidget
 from z3c.form.widget import Widget
 from z3c.form.browser.widget import HTMLInputWidget
+from z3c.form.browser.widget import HTMLFormElement
 
 from collective.schedulefield import _
 
 
 class ISchedule(IDict):
-    """
-    """
+    """ """
 
 
+class IScheduleWithTitle(IObject):
+    """IScheduleWithTitle"""
+
+
+@implementer(IScheduleWithTitle)
+class ScheduleWithTitle(schema.Object):
+    """ """
+
+
+@implementer(ISchedule, IFromUnicode)
 class Schedule(schema.Dict):
-    implements(ISchedule, IFromUnicode)
-
     def fromUnicode(self, value):
-        """
-        """
+        """ """
         self.validate(value)
         return value
 
     def validate(self, value):
-        value = json.loads(value)
+        if value is None or value is NO_VALUE:
+            return
+        if type(value) != dict:
+            value = json.loads(value)
         for day in value:
             for section in value[day]:
-                if section == 'comment':
+                if section == "comment":
                     continue
                 error = self._validate_format(value[day][section])
                 if error:
@@ -52,45 +65,45 @@ class Schedule(schema.Dict):
         """
         if not data:
             return None
-        hour, minute = data.split(':')
+        hour, minute = data.split(":")
         try:
             time(int(hour), int(minute))
         except ValueError:
-            return _(u'Not a valid time format.')
+            return _(u"Not a valid time format.")
 
         return None
 
 
+@implementer(ISchedule)
 class ScheduleWidget(HTMLInputWidget, Widget):
-    implements(ISchedule)
+
     """Schedule widget implementation."""
 
-    klass = u'schedule-widget'
-    css = u'schedule'
-    value = u''
+    klass = u"schedule-widget"
+    css = u"schedule"
+    value = u""
     size = None
     maxlength = None
 
     @property
     def days(self):
-        return (('monday', _('Monday')),
-                ('tuesday', _('Tuesday')),
-                ('wednesday', _('Wednesday')),
-                ('thursday', _('Thursday')),
-                ('friday', _('Friday')),
-                ('saturday', _('Saturday')),
-                ('sunday', _('Sunday')))
+        return (
+            ("monday", _("Monday")),
+            ("tuesday", _("Tuesday")),
+            ("wednesday", _("Wednesday")),
+            ("thursday", _("Thursday")),
+            ("friday", _("Friday")),
+            ("saturday", _("Saturday")),
+            ("sunday", _("Sunday")),
+        )
 
     @property
     def day_sections(self):
-        return ('morningstart',
-                'morningend',
-                'afternoonstart',
-                'afternoonend')
+        return ("morningstart", "morningend", "afternoonstart", "afternoonend")
 
     def update(self):
         super(ScheduleWidget, self).update()
-        if self.value and self.value is not NO_VALUE:
+        if self.value and self.value is not NO_VALUE and type(self.value) != dict:
             self.value = json.loads(self.value)
 
     def extract(self):
@@ -98,13 +111,13 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         is_empty = True
         for key, name in self.days:
             datas[key] = {
-                'comment': self.request.get(
-                    '{0}.{1}.comment'.format(self.name, key),
+                "comment": self.request.get(
+                    "{0}.{1}.comment".format(self.name, key),
                 ),
             }
             for day_section in self.day_sections:
                 data = self.request.get(
-                    '{0}.{1}.{2}'.format(self.name, key, day_section),
+                    "{0}.{1}.{2}".format(self.name, key, day_section),
                     None,
                 )
                 formated = self._format(data)
@@ -121,18 +134,18 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         return hour for a specific day section
         """
         if (not self.value) or (self.value is NO_VALUE):
-            return u''
+            return u""
         return self.value.get(day).get(day_section)
 
     def get_comment(self, day):
         """Return the comment for a specific day"""
         if not self.value or self.value is NO_VALUE:
-            return u''
-        return self.value.get(day).get('comment')
+            return u""
+        return self.value.get(day).get("comment")
 
     @staticmethod
     def _format(data):
-        if data == '__:__':
+        if data == "__:__":
             return None
         return data
 
@@ -150,8 +163,36 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         return must_show
 
 
+@implementer(IScheduleWithTitle)
+class ScheduleWithTitleWidget(HTMLFormElement, ObjectWidget):
+
+    klass = u"object-widget"
+    css = u"object"
+
+
+class WidgetDataConverter(BaseDataConverter):
+    adapts(ISchedule, IFieldWidget)
+
+    def toWidgetValue(self, value):
+        if value is not None and type(value) != dict:
+            return json.loads(value)
+        return value
+
+    def toFieldValue(self, value):
+        if value is not None and type(value) != dict:
+            return json.loads(value)
+        return value
+
+
 @adapter(ISchedule, IFormLayer)
 @implementer(IFieldWidget)
 def ScheduleFieldWidget(field, request):
     """IFieldWidget factory for cheduleWidget."""
     return FieldWidget(field, ScheduleWidget(request))
+
+
+@adapter(IObject, IFormLayer)
+@implementer(IFieldWidget)
+def ObjectFieldWidget(field, request):
+    """IFieldWidget factory for IObjectWidget."""
+    return FieldWidget(field, ScheduleWithTitleWidget(request))
