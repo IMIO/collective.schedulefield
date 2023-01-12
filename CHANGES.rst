@@ -4,6 +4,9 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
+- Drop support for Plone 4 & Plone 5
+  [laulaz]
+
 - Fix AttributeError traceback when accessing subforms
   [laulaz]
 
