@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0a3 (unreleased)
+1.0a3 (2023-01-12)
 ------------------
 
 - MANIFEST / release fix 
