@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0a2 (unreleased)
+1.0a2 (2023-01-12)
 ------------------
 
 - Drop support for Plone 4 & Plone 5
