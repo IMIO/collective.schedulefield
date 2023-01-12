@@ -41,7 +41,7 @@ class ExceptionalclosureDeserializer(DefaultFieldDeserializer):
 
     def __call__(self, value):
         if "date" not in value or "title" not in value:
-            raise ValueError(u"ExceptionalClosure dict must have title & date keys")
+            raise ValueError("ExceptionalClosure dict must have title & date keys")
         closure = ExceptionalClosureObject()
         for field_name in getFields(self.field.schema):
             deserializer = getMultiAdapter(

@@ -69,7 +69,7 @@ class Schedule(schema.Dict):
         try:
             time(int(hour), int(minute))
         except ValueError:
-            return _(u"Not a valid time format.")
+            return _("Not a valid time format.")
 
         return None
 
@@ -79,9 +79,9 @@ class ScheduleWidget(HTMLInputWidget, Widget):
 
     """Schedule widget implementation."""
 
-    klass = u"schedule-widget"
-    css = u"schedule"
-    value = u""
+    klass = "schedule-widget"
+    css = "schedule"
+    value = ""
     size = None
     maxlength = None
 
@@ -134,13 +134,13 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         return hour for a specific day section
         """
         if (not self.value) or (self.value is NO_VALUE):
-            return u""
+            return ""
         return self.value.get(day).get(day_section)
 
     def get_comment(self, day):
         """Return the comment for a specific day"""
         if not self.value or self.value is NO_VALUE:
-            return u""
+            return ""
         return self.value.get(day).get("comment")
 
     @staticmethod
@@ -158,7 +158,9 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         if not self.value:
             return must_show
         for day_section in self.day_sections:
-            if self.value.get(day).get(day_section) or self.value.get(day).get('comment'):
+            if self.value.get(day).get(day_section) or self.value.get(day).get(
+                "comment"
+            ):
                 must_show = True
         return must_show
 
@@ -166,8 +168,8 @@ class ScheduleWidget(HTMLInputWidget, Widget):
 @implementer(IScheduleWithTitle)
 class ScheduleWithTitleWidget(HTMLFormElement, ObjectWidget):
 
-    klass = u"object-widget"
-    css = u"object"
+    klass = "object-widget"
+    css = "object"
 
 
 class WidgetDataConverter(BaseDataConverter):

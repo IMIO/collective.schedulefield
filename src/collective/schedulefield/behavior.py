@@ -41,7 +41,7 @@ class IScheduledContent(Interface):
     )
 
     schedule = Schedule(
-        title=_(u"Schedule"),
+        title=_("Schedule"),
         key_type=ASCIILine(),
         value_type=Dict(key_type=ASCIILine(), value_type=ASCIILine()),
         required=False,
@@ -63,11 +63,11 @@ class IDateRange(Interface):
     """IDateRange"""
 
     start_date = Date(
-        title=_(u"Start date"),
+        title=_("Start date"),
     )
 
     end_date = Date(
-        title=_(u"End date"),
+        title=_("End date"),
     )
 
 
@@ -86,18 +86,18 @@ class IScheduledWithTitle(Interface):
     """IScheduledWithTitle"""
 
     title = Text(
-        title=_(u"Title"),
+        title=_("Title"),
     )
 
     dates = List(
-        title=_(u"Dates"),
+        title=_("Dates"),
         value_type=Object(__name__="DateRange", schema=IDateRange),
     )
 
     schedule = Schedule(
         key_type=ASCIILine(),
         value_type=Dict(key_type=ASCIILine(), value_type=ASCIILine()),
-        title=_(u"Schedule"),
+        title=_("Schedule"),
     )
 
 
@@ -132,14 +132,14 @@ class IMultiScheduledContent(Interface):
     )
 
     schedule = Schedule(
-        title=_(u"Schedule"),
+        title=_("Schedule"),
         key_type=ASCIILine(),
         value_type=Dict(key_type=ASCIILine(), value_type=ASCIILine()),
         required=False,
     )
 
     multi_schedule = MultiScheduleField(
-        title=_(u"Multi Schedule"),
+        title=_("Multi Schedule"),
         value_type=ScheduleWithTitle(
             __name__="MultiSchedule", schema=IScheduledWithTitle, required=False
         ),
@@ -157,11 +157,11 @@ class IExceptionalClosure(Interface):
     """IExceptionalClosure"""
 
     title = Text(
-        title=_(u"Title"),
+        title=_("Title"),
     )
 
     date = Date(
-        title=_(u"Date"),
+        title=_("Date"),
     )
 
 
@@ -195,7 +195,7 @@ class IExceptionalClosureContent(Interface):
     )
 
     exceptional_closure = ExceptionalClosureField(
-        title=_(u"Dates"),
+        title=_("Dates"),
         value_type=ExceptionalClosure(
             __name__="ExceptionalClosure", schema=IExceptionalClosure, required=False
         ),

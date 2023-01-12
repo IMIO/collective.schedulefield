@@ -22,8 +22,8 @@ class ExceptionalClosure(schema.Object):
 @implementer(IExceptionalClosure)
 class ExceptionalClosureWidget(HTMLFormElement, ObjectWidget):
 
-    klass = u"object-widget"
-    css = u"object"
+    klass = "object-widget"
+    css = "object"
 
 
 @adapter(IObject, IFormLayer)
