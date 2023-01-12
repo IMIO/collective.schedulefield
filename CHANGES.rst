@@ -4,7 +4,8 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix AttributeError traceback when accessing subforms
+  [laulaz]
 
 
 1.0a1 (2022-12-13)
