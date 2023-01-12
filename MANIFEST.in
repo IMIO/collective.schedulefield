@@ -1,6 +1,4 @@
+graft src/collective
 include *.rst
-include *.py
-graft collective
-recursive-include collective *.po
-recursive-include collective *.pot
-recursive-exclude collective *.pyc
+include *.GPL
+global-exclude *.pyc

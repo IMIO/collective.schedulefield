@@ -4,7 +4,8 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- MANIFEST / release fix 
+  [laulaz]
 
 
 1.0a2 (2023-01-12)
