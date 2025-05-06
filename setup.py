@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
+from setuptools import find_packages
+from setuptools import setup
 
-version = "1.0a4.dev0"
-
-from setuptools import setup, find_packages
 
 long_description = (
     open("README.rst").read() + "\n" + "Contributors\n"
@@ -16,13 +14,15 @@ long_description = (
 
 setup(
     name="collective.schedulefield",
-    version=version,
+    version="1.0a4.dev0",
     description="Schedule behaviors for Plone content types",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
+        "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
         "Framework :: Plone",
+        "Framework :: Plone :: Addon",
         "Framework :: Plone :: 6.0",
         "Framework :: Plone :: 6.1",
         "Programming Language :: Python",
@@ -33,7 +33,7 @@ setup(
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
-    keywords="",
+    keywords="Python Plone CMS",
     author="iMio",
     author_email="support@imio.be",
     url="https://github.com/IMIO/collective.schedulefield/",
@@ -66,7 +66,7 @@ setup(
             "zest.releaser",
         ],
     },
-   entry_points="""
+    entry_points="""
     [z3c.autoinclude.plugin]
     target = plone
     """,
