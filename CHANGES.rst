@@ -4,7 +4,8 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Upgrade dev environment to Plone 6.1-latest
+  [remdub]
 
 
 1.0a3 (2023-01-12)
