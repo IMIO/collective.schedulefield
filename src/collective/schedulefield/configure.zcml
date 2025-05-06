@@ -23,6 +23,14 @@
       directory="profiles/default"
       />
 
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="collective.schedulefield (uninstall)"
+      description="Uninstalls the collective.schedulefield add-on"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
   <adapter
       factory=".schedule.ScheduleFieldWidget"
       for=".schedule.ISchedule
