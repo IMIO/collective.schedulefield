@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 collective.schedulefield
 ------------------------
@@ -7,21 +6,19 @@ Created by mpeeters
 :license: GPL, see LICENCE.txt for more details.
 """
 
+from collective.schedulefield import _
+from collective.schedulefield.exceptionalclosure import ExceptionalClosure
+from collective.schedulefield.schedule import Schedule
+from collective.schedulefield.schedule import ScheduleWithTitle
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.autoform.view import WidgetsView
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel.directives import fieldset
-from zope.component import adapter
-from zope.interface import Interface
-from zope.interface import implementer
-from zope.interface import provider
-
-from collective.schedulefield import _
-from collective.schedulefield.schedule import Schedule
-from collective.schedulefield.schedule import ScheduleWithTitle
-from collective.schedulefield.exceptionalclosure import ExceptionalClosure
-
 from z3c.form.object import registerFactoryAdapter
+from zope.component import adapter
+from zope.interface import implementer
+from zope.interface import Interface
+from zope.interface import provider
 from zope.schema import ASCIILine
 from zope.schema import Date
 from zope.schema import Dict
@@ -50,7 +47,7 @@ class IScheduledContent(Interface):
 
 @implementer(IScheduledContent)
 @adapter(IDexterityContent)
-class ScheduledContent(object):
+class ScheduledContent:
     def __init__(self, context):
         self.context = context
 
@@ -72,7 +69,7 @@ class IDateRange(Interface):
 
 
 @implementer(IDateRange)
-class DateRange(object):
+class DateRange:
     """DateRange"""
 
     start_date = FieldProperty(IDateRange["start_date"])
@@ -102,7 +99,7 @@ class IScheduledWithTitle(Interface):
 
 
 @implementer(IScheduledWithTitle)
-class ScheduledWithTitle(object):
+class ScheduledWithTitle:
     """ScheduledWithTitle"""
 
     title = FieldProperty(IScheduledWithTitle["title"])
@@ -166,7 +163,7 @@ class IExceptionalClosure(Interface):
 
 
 @implementer(IExceptionalClosure)
-class ExceptionalClosureObject(object):
+class ExceptionalClosureObject:
     """ExceptionalClosureObject"""
 
     title = FieldProperty(IExceptionalClosure["title"])
@@ -205,6 +202,6 @@ class IExceptionalClosureContent(Interface):
 
 @implementer(IExceptionalClosureContent)
 @adapter(IDexterityContent)
-class ExceptionalClosureContent(object):
+class ExceptionalClosureContent:
     def __init__(self, context):
         self.context = context

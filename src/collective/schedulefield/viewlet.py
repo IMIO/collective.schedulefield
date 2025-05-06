@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 collective.schedulefield
 ------------------------
@@ -24,7 +23,7 @@ class ScheduledContentViewlet(WidgetsView, base.ViewletBase):
 
     def update(self):
         if self.can_view is True:
-            super(ScheduledContentViewlet, self).update()
+            super().update()
 
     @property
     def has_value(self):
@@ -60,7 +59,7 @@ class MultiScheduledContentViewlet(ScheduledContentViewlet):
             for d in dates:
                 if d.start_date <= date.today() <= d.end_date:
                     return False
-        return super(MultiScheduledContentViewlet, self).has_value
+        return super().has_value
 
     @property
     def get_multischedule(self):
@@ -93,7 +92,7 @@ class ExceptionalClosureContentViewlet(WidgetsView, base.ViewletBase):
 
     def update(self):
         if self.can_view is True:
-            super(ExceptionalClosureContentViewlet, self).update()
+            super().update()
 
     @property
     def get_closure(self):

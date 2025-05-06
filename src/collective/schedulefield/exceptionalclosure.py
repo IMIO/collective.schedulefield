@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from z3c.form.browser.widget import HTMLFormElement
 from z3c.form.interfaces import IFieldWidget
 from z3c.form.interfaces import IFormLayer

@@ -1,29 +1,24 @@
-# -*- coding: utf-8 -*-
-
-import json
+from collective.schedulefield import _
 from datetime import time
-
+from z3c.form.browser.widget import HTMLFormElement
+from z3c.form.browser.widget import HTMLInputWidget
+from z3c.form.converter import BaseDataConverter
+from z3c.form.interfaces import IFieldWidget
+from z3c.form.interfaces import IFormLayer
+from z3c.form.interfaces import NO_VALUE
+from z3c.form.object import ObjectWidget
+from z3c.form.widget import FieldWidget
+from z3c.form.widget import Widget
 from zope import schema
 from zope.component import adapter
 from zope.component import adapts
 from zope.interface import implementer
 from zope.schema.interfaces import IDict
-from zope.schema.interfaces import IObject
 from zope.schema.interfaces import IFromUnicode
+from zope.schema.interfaces import IObject
 from zope.schema.interfaces import WrongContainedType
 
-from z3c.form.interfaces import IFormLayer
-from z3c.form.interfaces import IFieldWidget
-from z3c.form.interfaces import NO_VALUE
-from z3c.form.object import ObjectWidget
-
-from z3c.form.converter import BaseDataConverter
-from z3c.form.widget import FieldWidget
-from z3c.form.widget import Widget
-from z3c.form.browser.widget import HTMLInputWidget
-from z3c.form.browser.widget import HTMLFormElement
-
-from collective.schedulefield import _
+import json
 
 
 class ISchedule(IDict):
@@ -49,7 +44,7 @@ class Schedule(schema.Dict):
     def validate(self, value):
         if value is None or value is NO_VALUE:
             return
-        if type(value) != dict:
+        if not isinstance(value, dict):
             value = json.loads(value)
         for day in value:
             for section in value[day]:
@@ -76,7 +71,6 @@ class Schedule(schema.Dict):
 
 @implementer(ISchedule)
 class ScheduleWidget(HTMLInputWidget, Widget):
-
     """Schedule widget implementation."""
 
     klass = "schedule-widget"
@@ -102,32 +96,36 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         return ("morningstart", "morningend", "afternoonstart", "afternoonend")
 
     def update(self):
-        super(ScheduleWidget, self).update()
-        if self.value and self.value is not NO_VALUE and type(self.value) != dict:
+        super().update()
+        if (
+            self.value
+            and self.value is not NO_VALUE
+            and not isinstance(self.value, dict)
+        ):
             self.value = json.loads(self.value)
 
     def extract(self):
-        datas = {}
+        data = {}
         is_empty = True
         for key, name in self.days:
-            datas[key] = {
+            data[key] = {
                 "comment": self.request.get(
-                    "{0}.{1}.comment".format(self.name, key),
+                    f"{self.name}.{key}.comment",
                 ),
             }
             for day_section in self.day_sections:
                 data = self.request.get(
-                    "{0}.{1}.{2}".format(self.name, key, day_section),
+                    f"{self.name}.{key}.{day_section}",
                     None,
                 )
-                formated = self._format(data)
-                datas[key][day_section] = formated
-                if formated is not None:
+                formatted = self._format(data)
+                data[key][day_section] = formatted
+                if formatted is not None:
                     is_empty = False
 
         if is_empty:
             return NO_VALUE
-        return json.dumps(datas)
+        return json.dumps(data)
 
     def get_hour_value(self, day, day_section):
         """
@@ -176,12 +174,12 @@ class WidgetDataConverter(BaseDataConverter):
     adapts(ISchedule, IFieldWidget)
 
     def toWidgetValue(self, value):
-        if value is not None and type(value) != dict:
+        if value is not None and not isinstance(value, dict):
             return json.loads(value)
         return value
 
     def toFieldValue(self, value):
-        if value is not None and type(value) != dict:
+        if value is not None and not isinstance(value, dict):
             return json.loads(value)
         return value
 

@@ -38,7 +38,7 @@ Changelog
   [laulaz]
 
 - Add missing key_type/value_type for Schedule field. This is needed (at least)
-  to export types schemas informations
+  to export types schemas information
   [laulaz]
 
 - Fix python3 compatibility : Use @implementer instead of implements
