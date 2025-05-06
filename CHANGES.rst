@@ -11,7 +11,7 @@ Changelog
 1.0a3 (2023-01-12)
 ------------------
 
-- MANIFEST / release fix 
+- MANIFEST / release fix
   [laulaz]
 
 

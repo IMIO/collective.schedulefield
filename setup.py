@@ -43,11 +43,31 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
+    python_requires=">=3.10",
     install_requires=[
         "setuptools",
         "Plone",
         # -*- Extra requirements: -*-
     ],
-    extras_require={"test": []},
-    entry_points={},
+    extras_require={
+        "test": [
+            "plone.app.testing",
+            "plone.app.contenttypes [test]",
+            "Products.CMFPlacefulWorkflow",  # needed for plone.app.testing.layers.PLONE_FIXTURE
+            "pytest",
+            "pytest-cov",
+            "pytest-plone",
+            "tox",
+        ],
+        "dev": [
+            "i18ndude",
+            "plone.exportimport",
+            "plone.meta",
+            "zest.releaser",
+        ],
+    },
+   entry_points="""
+    [z3c.autoinclude.plugin]
+    target = plone
+    """,
 )
