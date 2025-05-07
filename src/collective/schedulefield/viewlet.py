@@ -10,6 +10,7 @@ from collective.schedulefield.behavior import IExceptionalClosureContent
 from collective.schedulefield.behavior import IMultiScheduledContent
 from collective.schedulefield.behavior import IScheduledContent
 from datetime import date
+from datetime import datetime
 from datetime import timedelta
 from plone.app.layout.viewlets import common as base
 from plone.autoform.view import WidgetsView
@@ -73,11 +74,13 @@ class MultiScheduledContentViewlet(ScheduledContentViewlet):
                 for day in schedule.values():
                     if len([v for v in day.values() if v]) > 0:
                         dates = i._value["dates"] or []
+                        # __import__("pdb").set_trace()
                         for d in dates:
                             if (
-                                d.start_date - timedelta(days=TIMEDELTA)
+                                datetime.strptime(d["start_date"], "%Y-%m-%d").date()
+                                - timedelta(days=TIMEDELTA)
                                 <= date.today()
-                                <= d.end_date
+                                <= datetime.strptime(d["end_date"], "%Y-%m-%d").date()
                             ):
                                 widgets.append(i)
         return widgets
