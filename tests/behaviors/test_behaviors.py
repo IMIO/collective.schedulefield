@@ -1,54 +1,30 @@
-# from collective.geolocationbehavior.geolocation import IGeolocatable
-from collective.schedulefield.behavior import IExceptionalClosureContent
-from collective.schedulefield.behavior import IMultiScheduledContent
-from collective.schedulefield.behavior import IScheduledContent
-from collective.schedulefield.testing import FUNCTIONAL_TESTING
-from collective.schedulefield.testing import INTEGRATION_TESTING
 from plone import api
-from pytest_plone import fixtures_factory
 
 import pytest
 
 
-pytest_plugins = ["pytest_plone"]
+class TestBehaviors:
 
+    @pytest.fixture(autouse=True)
+    def _init(self, portal, contents):
+        self.portal = portal
+        self.contents = contents
 
-globals().update(
-    fixtures_factory(
-        (
-            (FUNCTIONAL_TESTING, "functional"),
-            (INTEGRATION_TESTING, "integration"),
-        )
-    )
-)
-
-
-@pytest.fixture
-def contents(portal, get_fti) -> list:
-    """Create test contents."""
-    response = {}
-    with api.env.adopt_roles(
+    @pytest.mark.parametrize(
+        "behavior",
         [
-            "Manager",
-        ]
-    ):
-
-        response = []
-
-        fti = get_fti("Document")
-        fti.behaviors = fti.behaviors + (
-            "collective.schedulefield.behavior.IScheduledContent",
             "collective.schedulefield.behavior.IExceptionalClosureContent",
             "collective.schedulefield.behavior.IMultiScheduledContent",
-        )
+            "collective.schedulefield.behavior.IScheduledContent",
+        ],
+    )
+    def test_has_behaviors(self, get_behaviors, behavior):
+        assert behavior in get_behaviors("Document")
 
-        page = api.content.create(
-            container=portal,
-            type="Document",
-            title="a page",
-        )
-        schedule = IScheduledContent(page)
-        schedule.schedule = {
+    def test_schedules(self, contents):
+        """Test if the behavior is correctly applied to the content."""
+
+        excepted_schedule = {
             "monday": {
                 "comment": "a comment",
                 "morningstart": "08:00",
@@ -99,19 +75,7 @@ def contents(portal, get_fti) -> list:
                 "afternoonend": "",
             },
         }
-        exceptional_closure = IExceptionalClosureContent(page)
-        exceptional_closure.exceptional_closure = [
-            {
-                "title": "first exceptional closure",
-                "date": "2025-10-01",
-            },
-            {
-                "title": "another exceptional closure",
-                "date": "2026-01-01",
-            },
-        ]
-        multi_schedule = IMultiScheduledContent(page)
-        multi_schedule.multi_schedule = [
+        excepted_multi_schedule = [
             {
                 "title": "first schedule",
                 "dates": [
@@ -169,9 +133,7 @@ def contents(portal, get_fti) -> list:
                         "afternoonend": "",
                     },
                 },
-            }
-        ]
-        multi_schedule.multi_schedule.append(
+            },
             {
                 "title": "second schedule",
                 "dates": [{"end_date": "2025-01-02", "start_date": "2024-12-31"}],
@@ -226,8 +188,20 @@ def contents(portal, get_fti) -> list:
                         "afternoonend": "",
                     },
                 },
-            }
-        )
-        page.reindexObject()
-        response.append(page.UID())
-        return response
+            },
+        ]
+        excepted_exceptional_closure = [
+            {"title": "first exceptional closure", "date": "2025-10-01"},
+            {"title": "another exceptional closure", "date": "2026-01-01"},
+        ]
+
+        page = api.content.get(UID=contents[0])
+        assert hasattr(page, "schedule")
+        assert hasattr(page, "exceptional_closure")
+        assert hasattr(page, "multi_schedule")
+
+        assert page.schedule == excepted_schedule
+        assert page.exceptional_closure == excepted_exceptional_closure
+        assert page.multi_schedule == excepted_multi_schedule
+
+        # __import__("pdb").set_trace()

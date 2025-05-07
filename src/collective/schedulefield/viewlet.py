@@ -74,7 +74,6 @@ class MultiScheduledContentViewlet(ScheduledContentViewlet):
                 for day in schedule.values():
                     if len([v for v in day.values() if v]) > 0:
                         dates = i._value["dates"] or []
-                        # __import__("pdb").set_trace()
                         for d in dates:
                             if (
                                 datetime.strptime(d["start_date"], "%Y-%m-%d").date()
