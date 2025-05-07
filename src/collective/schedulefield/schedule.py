@@ -44,7 +44,7 @@ class Schedule(schema.Dict):
     def validate(self, value):
         if value is None or value is NO_VALUE:
             return
-        if not isinstance(value, dict):
+        if type(value) != dict:
             value = json.loads(value)
         for day in value:
             for section in value[day]:
@@ -97,18 +97,14 @@ class ScheduleWidget(HTMLInputWidget, Widget):
 
     def update(self):
         super().update()
-        if (
-            self.value
-            and self.value is not NO_VALUE
-            and not isinstance(self.value, dict)
-        ):
+        if self.value and self.value is not NO_VALUE and type(self.value) != dict:
             self.value = json.loads(self.value)
 
     def extract(self):
-        data = {}
+        datas = {}
         is_empty = True
         for key, name in self.days:
-            data[key] = {
+            datas[key] = {
                 "comment": self.request.get(
                     f"{self.name}.{key}.comment",
                 ),
@@ -118,14 +114,14 @@ class ScheduleWidget(HTMLInputWidget, Widget):
                     f"{self.name}.{key}.{day_section}",
                     None,
                 )
-                formatted = self._format(data)
-                data[key][day_section] = formatted
-                if formatted is not None:
+                formated = self._format(data)
+                datas[key][day_section] = formated
+                if formated is not None:
                     is_empty = False
 
         if is_empty:
             return NO_VALUE
-        return json.dumps(data)
+        return json.dumps(datas)
 
     def get_hour_value(self, day, day_section):
         """
@@ -174,12 +170,12 @@ class WidgetDataConverter(BaseDataConverter):
     adapts(ISchedule, IFieldWidget)
 
     def toWidgetValue(self, value):
-        if value is not None and not isinstance(value, dict):
+        if value is not None and type(value) != dict:
             return json.loads(value)
         return value
 
     def toFieldValue(self, value):
-        if value is not None and not isinstance(value, dict):
+        if value is not None and type(value) != dict:
             return json.loads(value)
         return value
 
