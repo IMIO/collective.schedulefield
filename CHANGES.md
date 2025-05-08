@@ -2,13 +2,13 @@
 
 ## 1.0a4 (unreleased)
 
-- Update locales ([#3])
+- Update locales https://github.com/IMIO/collective.schedulefield/issues/3
   [remdub]
 
-- Add test environment using pytest, with test coverage reaching 80% ([#2])
+- Add test environment using pytest, with test coverage reaching 80% https://github.com/IMIO/collective.schedulefield/issues/2
   [remdub]
 
-- Fix MultiSchedule viewlet ([#4])
+- Fix MultiSchedule viewlet https://github.com/IMIO/collective.schedulefield/issues/4
   [remdub]
 
 - Upgrade dev environment to Plone 6.1-latest
