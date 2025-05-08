@@ -124,6 +124,10 @@ ignore = [
 #  """
 ##
 
+[tool.coverage.run]
+omit = [
+    "src/collective/schedulefield/utils.py"
+]
 
 ##
 # Add extra configuration options in .meta.toml:
