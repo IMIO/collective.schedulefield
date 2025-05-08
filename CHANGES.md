@@ -1,21 +1,27 @@
-Changelog
-=========
+# Changelog
 
-1.0a4 (unreleased)
-------------------
+## 1.0a4 (unreleased)
 
-- Nothing changed yet.
+- Update locales ([#3])
+  [remdub]
+
+- Add test environment using pytest, with test coverage reaching 80% ([#2])
+  [remdub]
+
+- Fix MultiSchedule viewlet ([#4])
+  [remdub]
+
+- Upgrade dev environment to Plone 6.1-latest
+  [remdub]
 
 
-1.0a3 (2023-01-12)
-------------------
+## 1.0a3 (2023-01-12)
 
-- MANIFEST / release fix 
+- MANIFEST / release fix
   [laulaz]
 
 
-1.0a2 (2023-01-12)
-------------------
+## 1.0a2 (2023-01-12)
 
 - Drop support for Plone 4 & Plone 5
   [laulaz]
@@ -24,8 +30,7 @@ Changelog
   [laulaz]
 
 
-1.0a1 (2022-12-13)
-------------------
+## 1.0a1 (2022-12-13)
 
 - Add basic serializers / deserializers
   [laulaz]
@@ -37,7 +42,7 @@ Changelog
   [laulaz]
 
 - Add missing key_type/value_type for Schedule field. This is needed (at least)
-  to export types schemas informations
+  to export types schemas information
   [laulaz]
 
 - Fix python3 compatibility : Use @implementer instead of implements
@@ -47,15 +52,13 @@ Changelog
   [fbruynbroeck]
 
 
-0.6.1 (2018-10-15)
-------------------
+## 0.6.1 (2018-10-15)
 
 - Do not display comment if empty.
   [bsuttor]
 
 
-0.6 (2018-04-23)
-----------------
+## 0.6 (2018-04-23)
 
 - Also view schedule if only comment is set.
   [bsuttor]
@@ -64,29 +67,25 @@ Changelog
   [sgeulette]
 
 
-0.5 (2017-04-27)
-----------------
+## 0.5 (2017-04-27)
 
 - Bugfix: get json schedule.
   [bsuttor]
 
 
-0.4 (2017-04-25)
-----------------
+## 0.4 (2017-04-25)
 
 - Bugfix: do not try to load json value if there is no values.
   [bsuttor]
 
 
-0.3 (2017-03-01)
-----------------
+## 0.3 (2017-03-01)
 
 - Do not render the viewlet if there is no values
   [mpeeters]
 
 
-0.2 (2016-07-14)
-----------------
+## 0.2 (2016-07-14)
 
 - Add the ScheduledContent behavior
   [mpeeters]
@@ -95,7 +94,6 @@ Changelog
   [mpeeters]
 
 
-0.1 (2014-08-26)
-----------------
+## 0.1 (2014-08-26)
 
- * Initial release
+ - Initial release

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective.schedulefield.behavior import ExceptionalClosureObject
 from collective.schedulefield.behavior import IDateRange
 from collective.schedulefield.behavior import IExceptionalClosureContent

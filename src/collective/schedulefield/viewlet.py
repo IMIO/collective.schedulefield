@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 collective.schedulefield
 ------------------------
@@ -11,6 +10,7 @@ from collective.schedulefield.behavior import IExceptionalClosureContent
 from collective.schedulefield.behavior import IMultiScheduledContent
 from collective.schedulefield.behavior import IScheduledContent
 from datetime import date
+from datetime import datetime
 from datetime import timedelta
 from plone.app.layout.viewlets import common as base
 from plone.autoform.view import WidgetsView
@@ -24,7 +24,7 @@ class ScheduledContentViewlet(WidgetsView, base.ViewletBase):
 
     def update(self):
         if self.can_view is True:
-            super(ScheduledContentViewlet, self).update()
+            super().update()
 
     @property
     def has_value(self):
@@ -60,7 +60,7 @@ class MultiScheduledContentViewlet(ScheduledContentViewlet):
             for d in dates:
                 if d.start_date <= date.today() <= d.end_date:
                     return False
-        return super(MultiScheduledContentViewlet, self).has_value
+        return super().has_value
 
     @property
     def get_multischedule(self):
@@ -76,9 +76,10 @@ class MultiScheduledContentViewlet(ScheduledContentViewlet):
                         dates = i._value["dates"] or []
                         for d in dates:
                             if (
-                                d.start_date - timedelta(days=TIMEDELTA)
+                                datetime.strptime(d["start_date"], "%Y-%m-%d").date()
+                                - timedelta(days=TIMEDELTA)
                                 <= date.today()
-                                <= d.end_date
+                                <= datetime.strptime(d["end_date"], "%Y-%m-%d").date()
                             ):
                                 widgets.append(i)
         return widgets
@@ -93,7 +94,7 @@ class ExceptionalClosureContentViewlet(WidgetsView, base.ViewletBase):
 
     def update(self):
         if self.can_view is True:
-            super(ExceptionalClosureContentViewlet, self).update()
+            super().update()
 
     @property
     def get_closure(self):

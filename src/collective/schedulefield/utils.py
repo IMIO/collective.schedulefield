@@ -1,6 +1,5 @@
-# encoding: utf-8
-from collective.schedulefield.behavior import IMultiScheduledContent
 from collective.schedulefield.behavior import IExceptionalClosureContent
+from collective.schedulefield.behavior import IMultiScheduledContent
 from datetime import date as dt
 
 

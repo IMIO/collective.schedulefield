@@ -1,29 +1,24 @@
-# -*- coding: utf-8 -*-
-
-import json
+from collective.schedulefield import _
 from datetime import time
-
+from z3c.form.browser.widget import HTMLFormElement
+from z3c.form.browser.widget import HTMLInputWidget
+from z3c.form.converter import BaseDataConverter
+from z3c.form.interfaces import IFieldWidget
+from z3c.form.interfaces import IFormLayer
+from z3c.form.interfaces import NO_VALUE
+from z3c.form.object import ObjectWidget
+from z3c.form.widget import FieldWidget
+from z3c.form.widget import Widget
 from zope import schema
 from zope.component import adapter
 from zope.component import adapts
 from zope.interface import implementer
 from zope.schema.interfaces import IDict
-from zope.schema.interfaces import IObject
 from zope.schema.interfaces import IFromUnicode
+from zope.schema.interfaces import IObject
 from zope.schema.interfaces import WrongContainedType
 
-from z3c.form.interfaces import IFormLayer
-from z3c.form.interfaces import IFieldWidget
-from z3c.form.interfaces import NO_VALUE
-from z3c.form.object import ObjectWidget
-
-from z3c.form.converter import BaseDataConverter
-from z3c.form.widget import FieldWidget
-from z3c.form.widget import Widget
-from z3c.form.browser.widget import HTMLInputWidget
-from z3c.form.browser.widget import HTMLFormElement
-
-from collective.schedulefield import _
+import json
 
 
 class ISchedule(IDict):
@@ -76,7 +71,6 @@ class Schedule(schema.Dict):
 
 @implementer(ISchedule)
 class ScheduleWidget(HTMLInputWidget, Widget):
-
     """Schedule widget implementation."""
 
     klass = "schedule-widget"
@@ -102,7 +96,7 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         return ("morningstart", "morningend", "afternoonstart", "afternoonend")
 
     def update(self):
-        super(ScheduleWidget, self).update()
+        super().update()
         if self.value and self.value is not NO_VALUE and type(self.value) != dict:
             self.value = json.loads(self.value)
 
@@ -112,12 +106,12 @@ class ScheduleWidget(HTMLInputWidget, Widget):
         for key, name in self.days:
             datas[key] = {
                 "comment": self.request.get(
-                    "{0}.{1}.comment".format(self.name, key),
+                    f"{self.name}.{key}.comment",
                 ),
             }
             for day_section in self.day_sections:
                 data = self.request.get(
-                    "{0}.{1}.{2}".format(self.name, key, day_section),
+                    f"{self.name}.{key}.{day_section}",
                     None,
                 )
                 formated = self._format(data)
