@@ -2,6 +2,8 @@
 from collective.schedulefield.behavior import IExceptionalClosureContent
 from collective.schedulefield.behavior import IMultiScheduledContent
 from collective.schedulefield.behavior import IScheduledContent
+from collective.schedulefield.schedule import IScheduleWithTitle
+from collective.schedulefield.schedule import ScheduleWithTitle
 from collective.schedulefield.testing import FUNCTIONAL_TESTING
 from collective.schedulefield.testing import INTEGRATION_TESTING
 from plone import api
@@ -48,6 +50,7 @@ def contents(portal, get_fti) -> list:
             title="a page",
         )
         schedule = IScheduledContent(page)
+
         schedule.schedule = {
             "monday": {
                 "comment": "a comment",
@@ -111,123 +114,239 @@ def contents(portal, get_fti) -> list:
             },
         ]
         multi_schedule = IMultiScheduledContent(page)
-        multi_schedule.multi_schedule = [
-            {
-                "title": "first schedule",
-                "dates": [
-                    {"end_date": "2025-05-08", "start_date": "2025-05-05"},
-                    {"end_date": "2027-06-04", "start_date": "2026-04-02"},
-                ],
-                "schedule": {
-                    "monday": {
-                        "comment": "",
-                        "morningstart": "06:00",
-                        "morningend": "10:00",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "tuesday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "wednesday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "thursday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "friday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "saturday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "15:00",
-                        "afternoonend": "17:00",
-                    },
-                    "sunday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
+        schedule1 = ScheduleWithTitle(schema=IScheduleWithTitle)
+        schedule1.schedule = {
+            "title": "first schedule",
+            "dates": [
+                {"end_date": "2025-05-08", "start_date": "2025-05-05"},
+                {"end_date": "2027-06-04", "start_date": "2026-04-02"},
+            ],
+            "schedule": {
+                "monday": {
+                    "comment": "",
+                    "morningstart": "06:00",
+                    "morningend": "10:00",
+                    "afternoonstart": "",
+                    "afternoonend": "",
                 },
-            }
-        ]
-        multi_schedule.multi_schedule.append(
-            {
-                "title": "second schedule",
-                "dates": [{"end_date": "2025-01-02", "start_date": "2024-12-31"}],
-                "schedule": {
-                    "monday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "tuesday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "wednesday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "thursday": {
-                        "comment": "",
-                        "morningstart": "10:00",
-                        "morningend": "11:00",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "friday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "saturday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
-                    "sunday": {
-                        "comment": "",
-                        "morningstart": "",
-                        "morningend": "",
-                        "afternoonstart": "",
-                        "afternoonend": "",
-                    },
+                "tuesday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
                 },
-            }
-        )
+                "wednesday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+                "thursday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+                "friday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+                "saturday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "15:00",
+                    "afternoonend": "17:00",
+                },
+                "sunday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+            },
+        }
+        schedule2 = ScheduleWithTitle(schema=IScheduleWithTitle)
+        schedule2.schedule = {
+            "title": "second schedule",
+            "dates": [{"end_date": "2025-01-02", "start_date": "2024-12-31"}],
+            "schedule": {
+                "monday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+                "tuesday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+                "wednesday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+                "thursday": {
+                    "comment": "",
+                    "morningstart": "10:00",
+                    "morningend": "11:00",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+                "friday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+                "saturday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+                "sunday": {
+                    "comment": "",
+                    "morningstart": "",
+                    "morningend": "",
+                    "afternoonstart": "",
+                    "afternoonend": "",
+                },
+            },
+        }
+        multi_schedule.multi_schedule = [schedule1, schedule2]
+        # multi_schedule.multi_schedule = [
+        #     {
+        #         "title": "first schedule",
+        #         "dates": [
+        #             {"end_date": "2025-05-08", "start_date": "2025-05-05"},
+        #             {"end_date": "2027-06-04", "start_date": "2026-04-02"},
+        #         ],
+        #         "schedule": {
+        #             "monday": {
+        #                 "comment": "",
+        #                 "morningstart": "06:00",
+        #                 "morningend": "10:00",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "tuesday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "wednesday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "thursday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "friday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "saturday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "15:00",
+        #                 "afternoonend": "17:00",
+        #             },
+        #             "sunday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #         },
+        #     }
+        # ]
+        # multi_schedule.multi_schedule.append(
+        #     {
+        #         "title": "second schedule",
+        #         "dates": [{"end_date": "2025-01-02", "start_date": "2024-12-31"}],
+        #         "schedule": {
+        #             "monday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "tuesday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "wednesday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "thursday": {
+        #                 "comment": "",
+        #                 "morningstart": "10:00",
+        #                 "morningend": "11:00",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "friday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "saturday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #             "sunday": {
+        #                 "comment": "",
+        #                 "morningstart": "",
+        #                 "morningend": "",
+        #                 "afternoonstart": "",
+        #                 "afternoonend": "",
+        #             },
+        #         },
+        #     }
+        # )
         page.reindexObject()
         response.append(page.UID())
         return response

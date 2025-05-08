@@ -1,3 +1,5 @@
+from collective.schedulefield.behavior import ExceptionalClosureContent
+from collective.schedulefield.behavior import ScheduledContent
 from plone import api
 
 import pytest
@@ -202,6 +204,15 @@ class TestBehaviors:
 
         assert page.schedule == excepted_schedule
         assert page.exceptional_closure == excepted_exceptional_closure
-        assert page.multi_schedule == excepted_multi_schedule
+        assert page.multi_schedule[0].schedule == excepted_multi_schedule[0]
+        assert page.multi_schedule[1].schedule == excepted_multi_schedule[1]
 
         # __import__("pdb").set_trace()
+
+    def test_scheduled_content_context(self):
+        scheduled = ScheduledContent("kamoulox")
+        assert scheduled.context == "kamoulox"
+
+    def test_exceptional_closure_content_context(self):
+        exceptional_closure = ExceptionalClosureContent("kamoulox")
+        assert exceptional_closure.context == "kamoulox"
