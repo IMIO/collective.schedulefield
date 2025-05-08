@@ -14,7 +14,7 @@ long_description = (
 
 setup(
     name="collective.schedulefield",
-    version="1.1",
+    version="1.1.1.dev0",
     description="Schedule behaviors for Plone content types",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 (unreleased)
+
+
+- Nothing changed yet.
+
+
 ## 1.1 (2025-05-08)
 
 - Update locales https://github.com/IMIO/collective.schedulefield/issues/3
