@@ -2,9 +2,10 @@
      tal:attributes="
        class view/klass;
      "
+     i18n:domain="collective.schedulefield"
 >
-  <span i18n:translate="">Fermeture exceptionnelle</span>: "<span tal:replace="python: view.widgets.get('title').value"></span>"
+  <span i18n:translate="">Exceptional closure</span>: "<span tal:replace="python: view.widgets.get('title').value"></span>"
   <br />
-  <span i18n:translate="">Le</span>
+  <span i18n:translate="">On</span>
   <span tal:replace="structure python: view.widgets.get('date').render()"></span>
 </div>

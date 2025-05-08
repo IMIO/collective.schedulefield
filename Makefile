@@ -35,7 +35,7 @@ lint: bin/tox
 .PHONY: i18n # Update locales
 i18n: bin/i18ndude
 	@echo "$(GREEN)==> Updating locales$(RESET)"
-	cd src/collective/contentsections/locales && ./update.sh
+	cd src/collective/schedulefield/locales && ./update.sh
 
 $(VENV_FOLDER)/bin/i18ndude: $(VENV_FOLDER)/bin/pip
 	@echo "$(GREEN)==> Install translation tools$(RESET)"
