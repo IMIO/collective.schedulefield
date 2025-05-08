@@ -1,6 +1,7 @@
 graft src/collective
 graft tests
 include *.rst
+include *.md
 include *.GPL
 include .coveragerc
 include .editorconfig

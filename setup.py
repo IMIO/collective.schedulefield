@@ -8,7 +8,7 @@ long_description = (
     + "\n"
     + open("CONTRIBUTORS.rst").read()
     + "\n"
-    + open("CHANGES.rst").read()
+    + open("CHANGES.md").read()
     + "\n"
 )
 
