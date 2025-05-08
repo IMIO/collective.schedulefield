@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0a4 (unreleased)
+## 1.1 (2025-05-08)
 
 - Update locales https://github.com/IMIO/collective.schedulefield/issues/3
   [remdub]
