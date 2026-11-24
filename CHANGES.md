@@ -10,6 +10,12 @@
   for Plone 6.0 and 6.1.
   [remdub]
 
+- Configure the package with plone.meta 2.12.0 (test matrix on Plone 6.2.3),
+  move its metadata to `pyproject.toml`, convert the license to Markdown and
+  run the development environment on Plone 6.2.3 with uv instead of buildout.
+  Declare `plone.api` in the `test` extra and drop the `dev` extra.
+  [remdub]
+
 
 ## 1.1 (2025-05-08)
 
