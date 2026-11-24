@@ -9,7 +9,7 @@ requires = ["setuptools>=68.2,<83", "wheel"]
 # will be kept by plone.meta
 [project]
 name = "collective.schedulefield"
-version = "2.0.0.dev0"
+version = "2.0.0"
 description = "Schedule behaviors for Plone content types"
 classifiers = [
     "Development Status :: 3 - Alpha",
