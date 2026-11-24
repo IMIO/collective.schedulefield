@@ -3,8 +3,7 @@ from setuptools import setup
 
 
 long_description = (
-    open("README.md").read() + "\n" + "Contributors\n"
-    "============\n"
+    open("README.md").read()
     + "\n"
     + open("CONTRIBUTORS.md").read()
     + "\n"
