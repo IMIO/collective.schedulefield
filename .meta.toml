@@ -1,13 +1,18 @@
 # Generated from:
-# https://github.com/plone/meta/tree/main/src/plone/meta/default
+# https://github.com/plone/meta/tree/2.x/src/plone/meta/default
 # See the inline comments on how to expand/tweak this configuration file
 [meta]
 template = "default"
-commit-id = "2.0.0"
+commit-id = "2.12.0"
 
-[tox]
-test_runner = "pytest"
-constraints_file = "https://dist.plone.org/release/6.1-dev/constraints.txt"
+[gitignore]
+extra_lines = """
+.lock
+.venv
+htmlcov/
+.mxdev_cache/
+requirements.txt
+"""
 
 [pyproject]
 dependencies_ignores = "['i18ndude', 'plone.app.layout', 'plone.autoform', 'plone.dexterity', 'plone.exportimport', 'plone.meta', 'plone.restapi', 'plone.supermodel', 'Products.CMFPlacefulWorkflow', 'pre-commit', 'pytest', 'pytest-cov', 'tox','zest.releaser', 'z3c.form', 'zope.component', 'zope.i18nmessageid', 'zope.interface', 'zope.publisher', 'zope.schema']"
@@ -27,3 +32,19 @@ omit = [
 extra_lines = """
 per-file-ignores = schedule.py:E721
 """
+
+[tox]
+test_runner = "pytest"
+test_path = "/tests"
+test_matrix = {"6.2" = ["3.14", "3.13", "3.12", "3.11", "3.10"]}
+constraints_files = {"6.2" = "https://dist.plone.org/release/6.2.3/constraints.txt"}
+
+[github]
+# No "circular": pytest-plone requires Products.CMFPlone[test], whose test extra
+# (plone.app.testing, plone.app.robotframework...) depends back on CMFPlone.
+jobs = [
+    "qa",
+    "coverage",
+    "dependencies",
+    "release_ready",
+    ]
