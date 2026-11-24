@@ -1,3 +1,5 @@
+# Contributors
+
 - Gillian Sampont, Original Author [Affinitic]
 - Benoît Suttor [iMio]
 - Christophe Boulanger [iMio]

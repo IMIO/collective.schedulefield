@@ -1,9 +1,20 @@
 # Changelog
 
-## 1.1.1 (unreleased)
+<!-- towncrier release notes start -->
+
+## 2.0.0 (unreleased)
 
 
-- Nothing changed yet.
+- Breaking: replace the `pkg_resources` namespace of `collective` with a PEP 420
+  native namespace. Support Plone 6.2 only, on Python 3.10 to 3.14. Use 1.1
+  for Plone 6.0 and 6.1.
+  [remdub]
+
+- Configure the package with plone.meta 2.12.0 (test matrix on Plone 6.2.3),
+  move its metadata to `pyproject.toml`, convert the license to Markdown and
+  run the development environment on Plone 6.2.3 with uv instead of buildout.
+  Declare `plone.api` in the `test` extra and drop the `dev` extra.
+  [remdub]
 
 
 ## 1.1 (2025-05-08)

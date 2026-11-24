@@ -1,8 +1,104 @@
 # Generated from:
-# https://github.com/plone/meta/tree/main/src/plone/meta/default
+# https://github.com/plone/meta/tree/2.x/src/plone/meta/default
 # See the inline comments on how to expand/tweak this configuration file
 [build-system]
-requires = ["setuptools>=68.2"]
+requires = ["setuptools>=68.2,<83", "wheel"]
+
+# START-MARKER-MANUAL-CONFIG
+# Anything from here until END-MARKER-MANUAL-CONFIG
+# will be kept by plone.meta
+[project]
+name = "collective.schedulefield"
+version = "2.0.0.dev0"
+description = "Schedule behaviors for Plone content types"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: Plone",
+    "Framework :: Plone :: 6.2",
+    "Framework :: Plone :: Addon",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+license = "GPL-2.0-only"
+dynamic = ["readme"]
+requires-python = ">=3.10"
+authors = [
+    {name = "iMio", email = "support@imio.be"},
+]
+dependencies = [
+    "Plone",
+]
+keywords = ["Python", "Plone", "CMS"]
+
+[project.entry-points."plone.autoinclude.plugin"]
+target = "plone"
+
+[project.optional-dependencies]
+test = [
+    "Products.CMFPlacefulWorkflow",  # needed for plone.app.testing.layers.PLONE_FIXTURE
+    "plone.api",
+    "plone.app.contenttypes[test]",
+    "plone.app.testing",
+    "pytest",
+    "pytest-cov",
+    "pytest-plone",
+    "zest.releaser[recommended]",
+    "zestreleaser.towncrier",
+]
+
+[project.urls]
+PyPI = "https://pypi.org/project/collective.schedulefield"
+Source = "https://github.com/IMIO/collective.schedulefield"
+Issues = "https://github.com/IMIO/collective.schedulefield/issues"
+Changelog = "https://github.com/IMIO/collective.schedulefield/blob/master/CHANGES.md"
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md", "CONTRIBUTORS.md", "CHANGES.md"], content-type = "text/markdown"}
+# END-MARKER-MANUAL-CONFIG
+
+[tool.towncrier]
+directory = "news/"
+filename = "CHANGES.md"
+start_string = "<!-- towncrier release notes start -->\n"
+title_format = "## {version} ({project_date})"
+template = "news/.changelog_template.jinja"
+underlines = ["", "", ""]
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "feature"
+name = "New features"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "bugfix"
+name = "Bug fixes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "internal"
+name = "Internal"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "documentation"
+name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "tests"
+name = "Tests"
+showcontent = true
 
 ##
 # Add extra configuration options in .meta.toml:
@@ -24,7 +120,7 @@ profile = "plone"
 ##
 
 [tool.black]
-target-version = ["py38"]
+target-version = ["py310"]
 
 ##
 # Add extra configuration options in .meta.toml:
@@ -84,7 +180,7 @@ Zope = [
 ]
 python-dateutil = ['dateutil']
 pytest-plone = ['pytest', 'zope.pytestlayer', 'plone.testing', 'plone.app.testing']
-ignore-packages = ['i18ndude', 'plone.app.layout', 'plone.autoform', 'plone.dexterity', 'plone.exportimport', 'plone.meta', 'plone.restapi', 'plone.supermodel', 'Products.CMFPlacefulWorkflow', 'pre-commit', 'pytest', 'pytest-cov', 'tox','zest.releaser', 'z3c.form', 'zope.component', 'zope.i18nmessageid', 'zope.interface', 'zope.publisher', 'zope.schema']
+ignore-packages = ['plone.app.layout', 'plone.autoform', 'plone.dexterity', 'plone.restapi', 'plone.supermodel', 'Products.CMFPlacefulWorkflow', 'pytest', 'pytest-cov', 'zest.releaser', 'zestreleaser.towncrier', 'z3c.form', 'zope.component', 'zope.i18nmessageid', 'zope.interface', 'zope.publisher', 'zope.schema']
 'Plone' = ['Products.CMFPlone', 'Products.CMFCore', 'Products.GenericSetup']
 'Products.CMFPlone' = ['Products.Five', 'plone.app.content', 'plone.app.contenttypes', 'plone.app.vocabularies', 'plone.app.uuid', 'plone.app.z3cform', 'plone.autoform', 'plone.base', 'plone.behavior', 'plone.dexterity', 'plone.indexer', 'plone.registry', 'plone.memoize', 'plone.namedfile', 'plone.schema', 'plone.supermodel', 'Products.GenericSetup','z3c.relationfield', 'zope.component', 'zope.i18nmessageid', 'zope.interface', 'zope.lifecycleevent', 'zope.publisher', 'zope.schema']
 
@@ -96,6 +192,11 @@ ignore-packages = ['i18ndude', 'plone.app.layout', 'plone.autoform', 'plone.dext
 #    "gitpython = ['git']",
 #    "pygithub = ['github']",
 #  ]
+#
+# The Zope and Plone mappings above are included by default. For a package
+# used outside the Zope world they are noise, and can be turned off with:
+#  [pyproject]
+#  plone_mappings = false
 ##
 
 [tool.check-manifest]

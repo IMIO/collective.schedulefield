@@ -15,7 +15,6 @@ from datetime import timedelta
 from plone.app.layout.viewlets import common as base
 from plone.autoform.view import WidgetsView
 
-
 TIMEDELTA = 14
 
 

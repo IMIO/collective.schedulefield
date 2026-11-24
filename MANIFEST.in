@@ -1,12 +1,10 @@
 graft src/collective
 graft tests
-include *.rst
+graft news
 include *.md
-include *.GPL
-include .coveragerc
-include .editorconfig
-include Makefile
-include buildout.cfg
-include requirements.txt
+include LICENSE.GPL
+exclude Makefile
+exclude mx.ini
+exclude instance.yaml
 global-exclude *.pyc
 global-exclude .DS_Store
