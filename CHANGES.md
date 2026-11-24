@@ -1,9 +1,12 @@
 # Changelog
 
-## 1.1.1 (unreleased)
+## 2.0.0 (unreleased)
 
 
-- Nothing changed yet.
+- Breaking: replace the `pkg_resources` namespace of `collective` with a PEP 420
+  native namespace. Support Plone 6.2 only, on Python 3.10 to 3.14. Use 1.1
+  for Plone 6.0 and 6.1.
+  [remdub]
 
 
 ## 1.1 (2025-05-08)

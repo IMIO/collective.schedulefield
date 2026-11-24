@@ -1,4 +1,4 @@
-from setuptools import find_packages
+from setuptools import find_namespace_packages
 from setuptools import setup
 
 
@@ -13,7 +13,7 @@ long_description = (
 
 setup(
     name="collective.schedulefield",
-    version="1.1.1.dev0",
+    version="2.0.0.dev0",
     description="Schedule behaviors for Plone content types",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -23,13 +23,13 @@ setup(
         "Environment :: Web Environment",
         "Framework :: Plone",
         "Framework :: Plone :: Addon",
-        "Framework :: Plone :: 6.0",
-        "Framework :: Plone :: 6.1",
+        "Framework :: Plone :: 6.2",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
@@ -38,14 +38,12 @@ setup(
     author_email="support@imio.be",
     url="https://github.com/IMIO/collective.schedulefield/",
     license="GPL version 2",
-    packages=find_packages("src"),
-    namespace_packages=["collective"],
+    packages=find_namespace_packages("src"),
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
     python_requires=">=3.10",
     install_requires=[
-        "setuptools",
         "Plone",
         # -*- Extra requirements: -*-
     ],
